@@ -1,6 +1,9 @@
 # Spring Boot
+
 ## 1.Spring Boot 项目的搭建：
+
 ### 1.1.注入依赖：在pom.xml文件中注入以下以来：
+
 ```xml
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -23,11 +26,11 @@
 >注解说明:
 @SpringBootApplication：
 > 发现@SpringBootApplication是一个复合注解，包括@ComponentScan，和@SpringBootConfiguration，@EnableAutoConfiguration.
-> 
+>
 > @SpringBootConfiguration继承自@Configuration，二者功能也一致，标注当前类是配置类，并会将当前类内声明的一个或多个以@Bean注解标记的方法的实例纳入到srping容器中，并且实例名就是方法名。
-> 
+>
 > @EnableAutoConfiguration的作用启动自动的配置，@EnableAutoConfiguration注解的意思就是Springboot根据你添加的jar包来配置你项目的默认配置，比如根据spring-boot-starter-web ，来判断你的项目是否需要添加了webmvc和tomcat，就会自动的帮你配置web项目中所需要的默认配置。在下面博客会具体分析这个注解，快速入门的demo实际没有用到该注解。
-> 
+>
 > @ComponentScan，扫描当前包及其子包下被@Component，@Controller，@Service，@Repository注解标记的类并纳入到spring容器中进行管理。是以前的<context:component-scan>（以前使用在xml中使用的标签，用来扫描包配置的平行支持）。所以本demo中的User为何会被spring容器管理。
 
 ## 2.Spring Boot + Redis 缓存处理：
@@ -68,6 +71,7 @@ spring.redis.pool.min-idle=0
 # 连接超时时间（毫秒）
 spring.redis.timeout=0  
 ```
+
 ## 3. thymeleaf模板引擎：
 
 ### 3.1.表达式语法：
@@ -93,7 +97,7 @@ spring.redis.timeout=0
   选择表达式很像变量表达式，不过它们用一个预先选择的对象来代替上下文变量容器(map)来执行，如下：
 
   ```java
-    *{customer.name} 
+    *{customer.name}
   ```
 
 * 3.URL表达式:
@@ -107,13 +111,12 @@ spring.redis.timeout=0
 * 4.URL表达式:
   URL表达式指的是把一个有用的上下文或回话信息添加到URL，这个过程经常被叫做URL重写。
 
-  ```
+  ```html
     <form th:action="@{/createOrder}">  
     <a href="main.html" th:href="@{/main}">
   ```
 
-#### 3.1.1常用th标签:
-
+#### 3.1.1常用th标签：
 
   <table border="2">
   <tbody>
@@ -248,10 +251,12 @@ spring.redis.timeout=0
 ```
 
 > ## MySQL 驱动名称改动：
-> ```properties
->   spring.datasource.driver-class-name=com.mysql.jdbc.Driver
->变更为:
->   spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+ ```properties
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver变更为:
+ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+```
 
 ### 4.2.创建JPA：
 
