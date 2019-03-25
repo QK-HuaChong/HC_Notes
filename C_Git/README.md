@@ -48,9 +48,12 @@
     git push -u origin master
 ```
 
-## 配置代理：
+## 配置（取消）代理：
 
 ```git
 git config --global http.proxy 192.168.6.3:808
 git config --global https.proxy 192.168.6.3:808
+
+git config --global --unset http.proxy
+git config --global --unset https.proxy
 ```
