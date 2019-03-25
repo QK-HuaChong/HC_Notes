@@ -384,6 +384,7 @@ public class Swagger2 {
 
 >swagger通过注解表明该接口会生成文档，包括接口名、请求方法、参数、返回的信息等等。
 
+
 |名称|描述
 --|:--
 @Api：|修饰整个类，描述Controller的作用
