@@ -1,0 +1,35 @@
+## 破解流程
+### 1. 准备jar  
+   * 下载JetbrainsCrack-2.9-release-enc.jar文件，并放到IDEA安装目录的bin目录下。 
+--- 
+### 2. 添加配置信息  
+   * 在IDEA安装目录的bin目录下的*idea.exe.vmoptions* 和 *idea64.exe.vmoptions*中添加:  
+   **-javaagent:F:\Intellij IDEA\IntelliJ IDEA 2018.1.4\bin\JetbrainsCrack-2.9-release-enc.jar**  
+---
+### 3. 添加注册码：  
+  >ThisCrackLicenseId-{
+"licenseId":"ThisCrackLicenseId",
+"licenseeName":"FowerIDEA",
+"assigneeName":"",
+"assigneeEmail":"www.hua121cc@foxmail.com",
+"licenseRestriction":"For This Crack, Only Test! Please support genuine!!!",
+"checkConcurrentUse":false,
+"products":[
+{"code":"II","paidUpTo":"2099-12-31"},
+{"code":"DM","paidUpTo":"2099-12-31"},
+{"code":"AC","paidUpTo":"2099-12-31"},
+{"code":"RS0","paidUpTo":"2099-12-31"},
+{"code":"WS","paidUpTo":"2099-12-31"},
+{"code":"DPN","paidUpTo":"2099-12-31"},
+{"code":"RC","paidUpTo":"2099-12-31"},
+{"code":"PS","paidUpTo":"2099-12-31"},
+{"code":"DC","paidUpTo":"2099-12-31"},
+{"code":"RM","paidUpTo":"2099-12-31"},
+{"code":"CL","paidUpTo":"2099-12-31"},
+{"code":"PC","paidUpTo":"2099-12-31"}
+],
+"hash":"2911276/0",
+"gracePeriodDays":7,
+"autoProlongated":false}
+
+## [链接网页](https://blog.csdn.net/qq853632587/article/details/75305304)
