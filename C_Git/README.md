@@ -37,6 +37,36 @@
     git remote add origin <server> <---> 连接到指定的远程仓库
 ```
 
+## 分支管理
+
+```git
+
+    1.创建一个叫做“feature_x”的分支，并切换过去：
+    git checkout -b feature_x
+    2.切换回主分支：
+    git checkout master
+    3.再把新建的分支删掉：
+    git branch -d feature_x
+    4.除非你将分支推送到远端仓库，不然该分支就是 不为他人所见的：
+    git push origin <branch>
+```
+
+## 更新与合并
+
+```git
+    1. 更新本地仓库：
+    git pull
+    2.合并其他分支到你的当前分支（例如 master），执行：
+    git merge <branch>
+```
+
+## 标签
+
+```git
+    创建的标签：
+    git tag 1.0.0 1b2e1d63ff
+```
+
 ## 上传到远程仓库Giuhub：
 
 ```git
