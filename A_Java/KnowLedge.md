@@ -1,7 +1,10 @@
 
 # ``Java知识``
+
 2018-03-06
+
 ===================
+
 > - 1.类名要求与文件包名一致
 > - 2.一个文件中只能有一个公共类，且文件名要与   公共类名一致
 > - 3.println:下行换行
@@ -722,25 +725,26 @@ public class TestBox{
 
 ```
 >####  泛型是不存在多态的
-
 > 自定义泛型方法：
 > - 修饰符 <T> 返回类型 方法名（参数） throws 异常{
   方法体
 }
-
 > 泛型通配符：
 > - ？ 可以通配任意类型
 > - ？ extend  E 
 > - ？ super   E
 
-> ## 枚举[enum]
+## 枚举[enum]
+
 > - 提供类型安全的常量
+
 ```java
 public enum Gender{
   男,
   女;
 }
 ```
+
 > - 对文件的输入输出操作
 >### 36.文件（File）
 > - 普通文件，块文件，文件夹，设备文件，网络文件
@@ -765,15 +769,18 @@ try(File .....){
 > - close()
 
 
-> ### IO流的基本步骤
+### IO流的基本步骤
+
 > - 把路径额字符串转化成File实例
 > - 对象有效性判断
 > - 创建流
 > - 循环读或写
 > - 释放资源
 
-> ## 过滤流（包装流）
+## 过滤流（包装流）
+
 > - 本身没有读写能力，必须嫁接在节流之上，可以在节点流的基础之上（以InputStream/OutputStream为参数）添加新的功能。
+
 > ### BufferedInputStream/BufferedOutpuStream[添加缓存]
 > ### ObjectInputStream/ObjectOutStream[添加了读写对象的功能]
 
@@ -789,6 +796,7 @@ try(File .....){
 > - BufferedReader (readLine()---整行读取)
 > - FilterReader    
 > read.ready()--判断是否可以读取
+
 ```java
 public class BRDemo(){
   BufferReader br = new try(BufferReader(FileReader(""))){
@@ -799,57 +807,65 @@ public class BRDemo(){
   }
 }
 ```
->### 输入
->### 具体子类
+
+### 输入
+
+### 具体子类
+
 > - FilerWriter
 > - BufferedWriter
 > - PrintWriter(println写入整行)
 > ### 桥接器
 >InputStreamReader  将字节流转换成字符流
+
 ```java
 BUfferedReader br = new Buffered(new InputStreamReader(M));
 ```
 
+## 38.反射
 
-> ## 38.反射
 > - 通过字节码(.class文件)窥视类的结构。
->### classLoder 类加载器
 
+### classLoder 类加载器
 
->### java.lang.Class<T>
+> - java.lang.Class<T>
 > - 表示类的类型，它是反射的入口。一个类型只能有一个Class实例。
-> #### 获得Class实例：
+
+#### 获得Class实例：
+
 > - 1.通关类名.class
 > - 2.通过对象.getClass()
 > - 3.通过Class的forName()
-> #### 
 > - newInstance()--- 通过Class...获取新的对象
 
-> ### Modifiers 类
+### Modifiers 类
+
 > - 返回类的修饰符---getModifiers()
-
 >- 返回类的属性---getDeclaredFiled()    getFiled()
-
 >setAccessible()---权限
-
 >- 反射创建数组对象
->Array.newInstance(Class<T> c,int length)    
+>Array.newInstance(Class<T> c,int length)
 >int[] arrInt = Array.newInstance(int.class,10);
 > - 添加元素:
-> Array.set(Object obj,int index,int element)     
+> Array.set(Object obj,int index,int element)
 >Array.set(arrInt,0,20)
 > - 获取数组指定元素
 >Array.get(Object bj,int index,int element)
->### 代理模式：
-> - InvocationHandler接口   
-      实现Invoke()方法
+
+### 代理模式：
+
+> - InvocationHandler接口:实现Invoke()方法
+
 ```java
  public Object invoke(Object proxy,Menthod menthod,Object[] args) {
 
  }
  ```
- > ## 39.线程
->### 程序与进程
+
+## 39.线程
+
+### 程序与进程
+
 > * 程序：为实现特定功能而设计的，通过计算机实现的。
 > * 进程：程序的动态执行过程。
 > - 1.线程自己不拥有资源，共享进程的全部资源。
@@ -857,13 +873,17 @@ BUfferedReader br = new Buffered(new InputStreamReader(M));
 > - 3.每个进程至少有一个线程
 > - 4.可以由主线程开启多个子线程，并发执行不同的任务，称为多线程。
 > - 5.三种基本状态：就绪、阻塞和运行
-> ### 方法介绍
+
+### 方法介绍
+
 > - setPriority();设置线程优先级（1~10）
 > - start()与run()方法区别:
 > 1. start(): 开启线程并执行该线程的run()方法
 > 2. run(): 仅仅只是对象调用方法 
 >#### 多线程机制：CPU的时分技术，模拟多线程并发。
->### 线程的生命周期
+
+### 线程的生命周期
+
 > - 新建状态(new)；已经实例化，但还未运行。
 > - 就绪状态(runnable)；一旦调用了start()方法，线程就进入了就绪状态，进入就绪线程队列。阻塞状态的线程解除阻塞后，自动进入就绪状态
 > - 运行状态(running)；就绪状态的线程获得CPU时间片时，进入运行状态。
@@ -875,19 +895,23 @@ BUfferedReader br = new Buffered(new InputStreamReader(M));
 Java调度算法= 基于时间片 + 固定优先级
 > - join()： 插入等待时间 
 > - yieId(): 让出CPU的时间片给其他线程
->### 线程的同步
-> - 1- 同步方法:synchronized修饰方法
+### 线程的同步
+ - 1- 同步方法:synchronized修饰方法
+
 ```java
 public synchronized  void A(){
   ...
 }
 ```
-> - 2- 同步代码段：synchronized修饰对象（又称互斥池、临界资源）
+
+ - 2- 同步代码段：synchronized修饰对象（又称互斥池、临界资源）
+  
 ```java
 synchronized(obj){
   ...
 }
 ```
+
 > ### 死锁
 >条件：互斥、请求和保持、不剥夺、环路等待
 > ### 线程通信
@@ -896,7 +920,9 @@ synchronized(obj){
 > - wait() : 释放临界资源，自己进入“等待队列”
 > - notify(): 随机唤醒一个等待资源的线程
 > - notifyAll(): 唤醒所有等待资源的线程。
-> ## 40.XML解析
+
+## 40.XML解析
+
 >1.DOM解析:会将XML文件转换成"倒置树"
 > - 创建工厂DocumentBuilderFactory实例    
 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -906,3 +932,61 @@ DocumentBulider builder = factory.newDocumentBulder();
 Document document = bulider.parse(InputStream);
 > - 获得根节点
 Element rootElement = document.getDocumentElement();
+
+## 41.注解
+
+### 作用：
+
+* 编写文档，通过代码中标识的元数据生成文档
+* 代码分析，通过代码中标识的元数据对代码进行分析
+* 编译检查，通过代码中标识的元数据让编译器实现基本的编译功能
+
+### 定义一个注解
+
+> 以`@interface`定义一个类，并且顶部通过几个原注解来说明这个注解的一些重要信息
+
+**元注解**
+
+|注解名|功能描述|
+|--|--|
+@Documented |注解是否将包含在JavaDoc中
+@Retention |什么时候使用该注解
+@Target |注解用于什么地方
+@Inherited | 是否允许子类继承该注解
+
+* @Documented: 
+  * 一个简单的Annotations标记注解，表示是否将注解信息添加在java文档中，一般不用管。
+
+* @Retention:
+  * 定义该注解的生命周期，很重要，必须指定，以下是3种生命周期的介绍
+  > **RetentionPolicy.SOURCE** – 在编译阶段丢弃。这些注解在编译结束之后就不再
+有任何意义，所以它们不会写入字节码。@Override, @SuppressWarnings都属
+于这类注解。
+**RetentionPolicy.CLASS** – 在类加载的时候丢弃。在字节码文件的处理中有用。
+注解默认使用这种方式。
+**RetentionPolicy.RUNTIME**– 始终不会丢弃，运行期也保留该注解，因此可以使
+用反射机制读取该注解的信息。我们自定义的注解通常使用这种方式。
+
+* @Target:
+  * 表示该注解用于什么地方。如果不明确指出，该注解可以放在任何地方。以下是一些可用的参数。    
+  * **ElementType.TYPE:** 用于描述类、接口或enum声明
+  * **ElementType.FIELD:** 用于描述实例变量
+  * **ElementType.METHOD**
+  * **ElementType.PARAMETER**
+  * **ElementType.LOCAL_VARIABLE**
+  * **ElementType.ANNOTATION_TYPE** 另一个注释
+  * **ElementType.PACKAGE** 用于记录java文件的package信息
+  
+* @Inherited
+  * 定义该注释和子类的关系
+
+```java
+  @Retention(RetentionPolicy.RUNTIME)
+  @Target({ElementType.TYPE, ElementType.METHOD})
+  @Inherited
+  @Documented
+  public @interface LogInfo {
+      String module () default "";
+      String action () default "";
+  }
+```
