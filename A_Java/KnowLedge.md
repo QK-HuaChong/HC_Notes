@@ -796,7 +796,7 @@ try(File .....){
 > - BufferedReader (readLine()---整行读取)
 > - FilterReader    
 > read.ready()--判断是否可以读取
-
+> 
 ```java
 public class BRDemo(){
   BufferReader br = new try(BufferReader(FileReader(""))){
