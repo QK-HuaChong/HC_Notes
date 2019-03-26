@@ -375,15 +375,12 @@ public class Swagger2 {
                 .description("API 描述")
                 .build();
     }
- 
- 
 }
 ```
 
 * Swagger注解
 
 >swagger通过注解表明该接口会生成文档，包括接口名、请求方法、参数、返回的信息等等。
-
 
 |名称|描述
 --|:--
@@ -398,3 +395,35 @@ public class Swagger2 {
 @ApiError ：|发生错误返回的信息
 @ApiImplicitParam：|一个请求参数
 @ApiImplicitParams：|多个请求参数
+
+## Lombok的使用
+
+### 如何使用
+
+* IDEA需要安装Lombok插件
+  * 打开IDEA的Setting –> 选择Plugins选项 –> 选择Browse repositories –> 搜索lombok –> 点击安装 –> 安装完成重启IDEA –> 安装成功
+
+* 导入相关jar
+
+```xml
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.16.18</version>
+    <scope>provided</scope>
+</dependency>
+```
+
+### 相关注解介绍
+
+|注解名|作用|
+-|-|
+@Getter|作用在类上或成员变量上，生成对应的 getter 方法
+@Setter|作用在类上或成员变量上，生成对应的 setter 方法
+@NoArgsConstructor|作用在类上，生成对应的无参构造方法
+@AllArgsConstructor|作用在类上，生成对应的有参构造方法
+@ToString|作用在类上，生成对应的 toString 方法
+@EqualsAndHashCode|作用在类上，生成对应的 equals 和 hashCode 方法
+@Data|作用在类上，效果等同于上述 5 个注解，排除 @AllArgsConstructor 功能
+@Log4j/@Slf4j|作用在类上，生成对应的 Logger 对象，变量名为 log
