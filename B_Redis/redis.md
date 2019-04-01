@@ -65,6 +65,8 @@ LRANGE key start stop|获取一定长度的元素
 
 ## Redis 集合
 
+### 无序集合
+
 |命令|描述|
 |--|--|
 `SADD key member1 [member2..]`|将一个或多个成员添加到集合
@@ -73,6 +75,22 @@ SCARD key|获取集合中的成员数
 SDIFF key1 [key2]|减去多个集合
 SINTER key1 [key2]|相交多个集合
 SUNION key1 [key2]|添加多个集合
+
+### 有序集合
+
+|命令|描述|
+|--|--|
+ZADD key score1 member1 [score2 member2]|向有序集合添加一个或多个成员，或者更新已存在成员的分数
+ZCARD key|获取有序集合的成员数
+ZCOUNT key min max|计算在有序集合中指定区间分数的成员数
+ZINCRBY key increment member|有序集合中对指定成员的分数加上增量 increment
+ZINTERSTORE destination numkeys key [key ...]|计算给定的一个或多个有序集的交集并将结果集存储在新的有序集合 key 中
+ZLEXCOUNT key min max|在有序集合中计算指定字典区间内成员数量
+ZRANGE key start stop [WITHSCORES]|通过索引区间返回有序集合成指定区间内的成员
+ZRANGEBYLEX key min max [LIMIT offset count]|通过字典区间返回有序集合的成员
+ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT]|通过分数返回有序集合指定区间内的成员
+ZRANK key member|返回有序集合中指定成员的索引
+ZREM key member [member ...]|移除有序集合中的一个或多个成员
 
 ## Redis HyperLogLog
 
@@ -83,3 +101,64 @@ SUNION key1 [key2]|添加多个集合
 PFADD key element [element..]|将指定的元素添加到HyperLogLog中
 PFCOUNT key [key..]|返回给定的HyperLogLog的基数估算值
 PFMERGE destkey sourcekey [sourcekey..]|将多个HyperLogLog合并为一个新的HyperLogLog
+
+## Redis 事务
+
+- Redis事务由命令`MULTI`命令启动，然后需要传递一个应该在事务中执行的命令列表，然后整个事务由`EXEC`命令执行。
+
+- 示例：
+  
+```redis
+redis 127.0.0.1:6379> MULTI
+OK
+redis 127.0.0.1:6379> SET mykey "redis"
+QUEUED
+redis 127.0.0.1:6379> GET mykey
+QUEUED
+redis 127.0.0.1:6379> INCR visitors
+QUEUED
+redis 127.0.0.1:6379> EXEC  
+1) OK
+2) "redis"
+3) (integer) 1
+```
+
+|命令|描述|
+|--|--|
+DISCARD|丢失在MULTI之后发送的所有命令
+EXEC|执行在MUULTI之后发出的所有命令
+MULTI|编辑事务块的开始
+UNWHATCH|取消WHATCH民航临海对所有key的监视
+WHATCH key [key ...]|监视给定的间以确定MULTI/EXEC块的执行
+
+## Redis 连接
+
+|命令|描述|
+|--|--|
+AUTH password|使用给定的密码验证服务器
+ECHO message|打印给定的字符串信息
+PING|检查服务器是否在运行
+QUIT|关闭当前连接
+SELECT index|更改当前连接的所选数据库
+
+## Redis 内存淘汰机制
+
+- 在redis.config中有一行配置：
+  
+>maxmemory-policy volatile-lru
+
+- noeviction：当内存不足以容纳新写入数据时，新写入操作会报错。应该没人用吧。
+
+- `allkeys-lru`：当内存不足以容纳新写入数据时，在键空间中，移除最近最少使用的key。**推荐使用**，目前项目在用这种。
+
+- allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机移除某个key。应该也没人用吧，你不删最少使用Key,去随机删。
+
+- volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的key。这种情况一般是把redis既当缓存，又做持久化存储的时候才用。不推荐
+
+- volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个key。依然不推荐
+
+- volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的key优先移除。不推荐
+
+## 相关链接
+
+[Redis入门教程](https://blog.csdn.net/weixin_40753536/article/details/80109251)
