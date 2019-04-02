@@ -5,7 +5,7 @@
 ## Redis命令
 
 - 启动Rsdis
-  >- redsi-cli
+  >- redis-cli
 
 - 在远程服务器上运行命令
   >- redis-cli -h host -p port -a password
@@ -37,7 +37,7 @@ STRLEN key|获取指定键的值的长度
 MGET key1 [key2...]|获取所有指定键的值
 MSET key1 value [key2 value...]|为多个键设置他们的值
 
-## Redis 哈希
+## Redis 散列
 
 - Redis Hashes是字符串字段和字符串值之间的映射(类似于PHP中的数组类型)。 因此，它们是表示对象的完美数据类型。
 
@@ -57,9 +57,9 @@ HVALS key|获取哈希中所有的值
 
 |命令|描述|
 |--|--|
-`LPUSH key value1 [value2]`|将一个或多个值存入列表
+`LPUSH（RPUSH） key value1 [value2]`|将一个或多个值存入列表
 `LPOP key`|删除并获取列表中的第一个值
-LSET key index value|通过索引在列表中设置元素的值
+LINDEX key index value|通过索引在列表中设置元素的值
 LRANGE key start stop|获取一定长度的元素
 `RPOP key`|删除并获取列表中的最后一个值
 
@@ -75,6 +75,8 @@ SCARD key|获取集合中的成员数
 SDIFF key1 [key2]|减去多个集合
 SINTER key1 [key2]|相交多个集合
 SUNION key1 [key2]|添加多个集合
+SMERMBERS key|获取指定集合中的所有元素
+SISMEMBER key value|检查集合中是否包含该元素
 
 ### 有序集合
 
@@ -158,6 +160,8 @@ SELECT index|更改当前连接的所选数据库
 - volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个key。依然不推荐
 
 - volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，有更早过期时间的key优先移除。不推荐
+
+## 单独
 
 ## 相关链接
 
