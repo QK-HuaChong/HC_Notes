@@ -68,8 +68,9 @@ new Vue({
 
 >指令（Directives）是带有v-前缀的特殊特性。指令特性的值预期是单个JavaScript表达式（v-for是例外情况，稍后我们再讨论）。指令的职责是，当表达式的值改变时，将其产生的连带影响，响应式地作用于DOM。
 
-- 条件语句
-  - **v-if** And **v-else** And **v-else-if**
+### 条件语句
+
+- **v-if** And **v-else** And **v-else-if**
     >v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 truthy 值的时候被渲染。也可以用 v-else 添加一个“else 块”
 
 ```html
@@ -111,14 +112,121 @@ new Vue({
     </script>
 ```
 
-- 双向数据绑定
-  >v-model 指令用来在 input、select、text、checkbox、radio 等表单控件元素上创建双向数据绑定，根据表单上的值，自动更新绑定的元素的值。
+### 样式绑定
+
+- 绑定HTML class
+    >我们可以传给`v-bind:class `一个对象，以动态地切换 class
+
+```html
+    <div id = "computed_props">
+        <div v-bind:class="{ active: use }"><sapn>样式绑定</span></div>
+        <input type="checkbox" v-model="use" id="cb">
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#example',
+            data: {
+                user: false,
+            }
+        })
+    </script>
+```
+
+- 绑定内联样式
+  >`v-bind:style` 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。CSS 属性名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用单引号括起来) 来命名
+  
+```html
+
+    <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+
+    data: {
+        activeColor: 'red',
+        fontSize: 30
+    }
+
+    <!--直接绑定到一个样式对象通常更好-->
+    <div v-bind:style="styleObject"></div>
+    data: {
+        styleObject: {
+            color: 'red',
+            fontSize: '13px'
+        }
+    }
+```
+
+### 事件绑定
+
+>v-on 指令，它用于监听 DOM 事件
+
+```html
+    <div id="app">
+        <p>The button above has been clicked {{ counter }} times.</p>
+        <button v-on:click="counter += 1">+1</button>
+        <button v-on:click="counter -= 1">-1</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el : '#app',
+            data : {
+                counter : 0,
+            }
+        })
+    </script>
+```
+
+>`v-on` 还可以接收一个需要调用的方法名称。
+
+```html
+    <div id="app">
+        <button v-on:click="greet">Greet</button>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el : '#app',
+            data : {
+                name:'Jhonaon'
+            },
+            methods : {
+                greet:function(){
+                    alert('Hello ' + this.name + ' !')
+                }
+            }
+        })
+    </script>
+```
+
+- 事件修饰符
+
+|描述|方法|
+|---|:---|
+阻止单击事件继续传播|\<a v-on:click.stop="doThis"></a>
+提交事件不再重载页面|\<form v-on:submit.prevent="onSubmit"></form>
+修饰符可以串联|\<a v-on:click.stop.prevent="doThat"></a>
+只有修饰符|\<form v-on:submit.prevent></form>
+添加事件监听器时使用事件捕获模式、即元素自身触发的事件先在此处理，然后才交由内部元素进行处理|\<div v-on:click.capture="doThis">...</div>
+只当在 event.target 是当前元素自身时触发处理函数、即事件不是从内部元素触发的|\<div v-on:click.self="doThat">...</div>
+点击事件将只会触发一次|\<a v-on:click.once="doThis"></a>
+
+### 双向数据绑定
+
+  >`v-model`指令用来在 input、select、text、checkbox、radio 等表单控件元素上创建双向数据绑定，根据表单上的值，自动更新绑定的元素的值。
 
 ```html
     <div id="app">
         <h3>{{ title }}</h3>
         <input v-model="title" />
     </div>
+    <script>
+        var vm = new Vue({
+            el : '#app',
+            data : {
+            title : '一带一路',
+            }
+        })
+    </script>
 ```
 
 ## 四、计算属性
@@ -182,7 +290,118 @@ new Vue({
     </script>
 ```
 
-### 样式绑定
+### 过滤器
 
-- 绑定HTML class
-    >我们可以传给 v-bind:class 一个对象，以动态地切换 class：
+>Vue.js 允许你自定义过滤器，被用作一些常见的文本格式化
+
+```html
+    <div id="app">
+        {{ message | capitalize }}
+    </div>
+    <script>
+        new Vue({
+        el: '#app',
+        data: {
+            message: 'runoob'
+        },
+        filters: {
+            capitalize: function (value) {
+            if (!value) return ''
+            value = value.toString()
+            return value.charAt(0).toUpperCase() + value.slice(1)
+            }
+        }
+        })
+    </script>
+```
+
+## 组件
+
+### 全局注册
+
+>Vue.component
+
+```js
+    Vue.component('my-component-name', {
+  // ... 选项 ...
+})
+```
+
+### 局部注册
+
+```js
+    new Vue({
+        el: '#app',
+        components: {
+            'component-a': ComponentA,
+            'component-b': ComponentB
+        }
+    })
+```
+
+### data 必须是有一个函数
+
+>一个组件的 data 选项必须是一个函数，因此每个实例可以维护一份被返回对象的独立的拷贝
+
+```js
+    data: function () {
+        return {
+            ...
+        }
+}
+```
+
+### prop 向组件传递数据
+
+>Prop 是你可以在组件上注册的一些自定义特性。当一个值传递给一个 prop 特性的时候，它就变成了那个组件实例的一个属性
+
+```js
+    Vue.component('blog-post', {
+        props: ['title'],
+        //以对象形式列出 prop
+        props:{
+            //名称：类型
+            'title':String,
+        },
+        template: '<h3>{{ title }}</h3>'
+    })
+```
+
+### 自定义事件
+
+>子组件要把数据传递回去，就需要使用自定义事件
+
+- 使用 $on(eventName) 监听事件
+- 使用 $emit(eventName) 触发事件
+
+```html
+    <div id="app">
+        <div :style="{ fontSize: postFontSize + 'em' }">
+            <pigg-text v-for="post in posts"
+                v-bind:key="post.id"v-bind:post="post"
+                v-on:enlarge-text="postFontSize += 0.1"
+                v-on:ensmall-text="postFontSize -= 0.1">
+            </pigg-text>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                posts: [
+                    { id: 1, title: 'My journey with Vue' },
+                    { id: 2, title: 'Blogging with Vue' },
+                    { id: 3, title: 'Why Vue is so fun' }
+                ],
+                postFontSize: 1
+            },
+            components:{
+                'pigg-text':{
+                    props:['post'],
+                    template:'<div><h3>{{post.title}}</h3><button v-on:click="$emit(\'enlarge-text\')">Enlarge text</button><button v-on:click="$emit(\'ensmall-text\')">Ensmall text</button></div>'
+                }
+            }
+        })
+    </script>
+```
