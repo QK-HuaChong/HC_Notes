@@ -315,7 +315,7 @@ new Vue({
     </script>
 ```
 
-## 组件
+## 五、组件
 
 ### 全局注册
 
@@ -405,3 +405,113 @@ new Vue({
         })
     </script>
 ```
+
+## 六、插槽
+
+### 单个插槽
+
+>除非子组件模板包含至少一个 ```<slot>``` 插口，否则父组件的内容将会被丢弃。当子组件模板只有一个没有属性的插槽时，父组件传入的整个内容片段将插入到插槽所在的 DOM 位置，并替换掉插槽标签本身。
+
+```html
+    <div id="app">
+        <slot-span>你好</slot-span>
+    </div>
+
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        components:{
+            'slot-span':{
+                template:'<span><slot></slot></span>'
+            }
+        }
+    })
+    </script>
+```
+
+### 具名插槽
+
+>``<slot>`` 元素可以用一个特殊的特性 name 来进一步配置如何分发内容。多个插槽可以有不同的名字。具名插槽将匹配内容片段中有对应 slot 特性的元素。仍然可以有一个匿名插槽，它是默认插槽，作为找不到匹配的内容片段的备用插槽。如果没有默认插槽，这些找不到匹配的内容片段将被抛弃。
+
+```html
+    <app-layout>
+        <template v-slot:header><h2>Title on header</h2></template>
+        <template v-slot:default><p>Context</p></template>
+        <template v-slot:footer><a href="www.baidu.com">百度链接</a></template>
+    </app-layout>
+
+    <script>
+    var vm = new Vue({
+        el:'#app',
+        components:{
+            'app-layout':{
+                template:'<div class="container">'+
+                '<header><slot name="header"></slot></header>'+
+                '<main><slot></slot></main>'+
+                '<footer><slot name="footer"></slot></footer>'+
+                '</div>'
+            }
+        }
+    })
+    </script>
+
+```
+
+### 作用域插槽
+
+>1、使用作用域插槽将子组件中的数据传递出去     
+>2、使用场景： 子组件做循环显示，或者子组件的某一部分由外部指定的时候，就使用作用域插槽。
+
+```html
+    <div id='app'>
+        <xi-list :lists='xiyouji' odd-bgcolor="#D3DCE6" even-bgcolor="#E5E9F2" listStyle=none>
+            <template v-slot:default='show'>{{show.list.name}}</template>
+        </xi-list>
+        <xi-list :lists='hongloumeng' odd-bgcolor="#D3DCE6" even-bgcolor="#E5E9F2" listStyle=none>
+            <template v-slot:default='show'>{{show.list.name}}</template>
+        </xi-list>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                xiyouji:[
+                    {id:1,name:'孙悟空'},
+                    {id:2,name:'猪八戒'},
+                    {id:3,name:'沙和尚'},
+                    {id:4,name:'唐僧'},
+                    {id:5,name:'小白龙'},
+                ],
+                hongloumeng:[
+                    {id:1,name:'林黛玉'},
+                    {id:2,name:'薛宝钗'},
+                    {id:3,name:'贾宝玉'},
+                    {id:4,name:'史湘云'},
+                    {id:5,name:'贾元春'},
+                ],
+            },
+            components:{
+                'xi-list':{
+                    props:{
+                        lists:Array,
+                        oddBgcolor: String,
+                        evenBgcolor: String,
+                    },
+                    template:`<div>
+                                    <ul>
+                                        <li v-bind:style="styleli" v-for="(list,index) in lists" style="line-height:2.2;list-style-type:none;" :style="index % 2 === 0 ? 'background:'+oddBgcolor : 'background:'+evenBgcolor">
+                                            <slot v-bind:list="list"></slot>
+                                        </li>
+                                    </ul>
+                                </div>`,
+                }
+            }
+        })
+    </script>
+```
+
+## 自定义指令
+
+>代码复用和抽象的主要形式是组件。然而，有的情况下，你仍然需要对普通 DOM 元素进行底层操作，这时候就会用到自定义指令
+
