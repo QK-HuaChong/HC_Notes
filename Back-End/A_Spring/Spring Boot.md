@@ -39,13 +39,13 @@
 
 Redis是一款开源的、高性能的键-值存储（key-value store）。它常被称作是一款数据结构服务器（data structure server）。
 
-### 2.2.依赖注入:
+### 2.2.依赖注入：
 
 ```xml
     <dependency>  
         <groupId>org.springframework.boot</groupId>  
-        <artifactId>spring-boot-starter-redis</artifactId> 
-    </dependency> 
+        <artifactId>spring-boot-starter-redis</artifactId>
+    </dependency>
 ```
 
 ### 2.3.添加配置信息：
@@ -237,6 +237,7 @@ spring.redis.timeout=0
     </tr>
   </tbody>
   </table>
+
 
 ## 4.Spring Boot + JPA
 

@@ -323,7 +323,7 @@ new Vue({
 
 ```js
     Vue.component('my-component-name', {
-  // ... 选项 ...
+     // ... 选项 ...
 })
 ```
 
@@ -399,7 +399,7 @@ new Vue({
             components:{
                 'pigg-text':{
                     props:['post'],
-                    template:'<div><h3>{{post.title}}</h3><button v-on:click="$emit(\'enlarge-text\')">Enlarge text</button><button v-on:click="$emit(\'ensmall-text\')">Ensmall text</button></div>'
+                    template:`<div><h3>{{post.title}}</h3><button v-on:click="$emit('enlarge-text')">Enlarge text</button><button v-on:click="$emit('ensmall-text')">Ensmall text</button></div>`
                 }
             }
         })
@@ -422,7 +422,7 @@ new Vue({
         el:'#app',
         components:{
             'slot-span':{
-                template:'<span><slot></slot></span>'
+                template:`<span><slot></slot></span>`
             }
         }
     })
@@ -445,11 +445,11 @@ new Vue({
         el:'#app',
         components:{
             'app-layout':{
-                template:'<div class="container">'+
-                '<header><slot name="header"></slot></header>'+
-                '<main><slot></slot></main>'+
-                '<footer><slot name="footer"></slot></footer>'+
-                '</div>'
+                template:`<div class="container">
+                    <header><slot name="header"></slot></header>
+                    <main><slot></slot></main>
+                    <footer><slot name="footer"></slot></footer>
+                </div>`
             }
         }
     })
