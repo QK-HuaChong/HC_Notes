@@ -155,3 +155,18 @@
 - remove(element) 方法
 
 >根据值删除指定位置的元素
+
+```python
+
+    bicycles = ['trek','connondale','honda','redline']
+
+    bicycles.pop()
+    bicycles.remove('connondale')
+    del.bicycles(1)
+
+    #输出结果
+    ['trek','connondale','honda']
+    ['trek','honda']
+    ['trek']
+
+```
