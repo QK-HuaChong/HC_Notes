@@ -88,7 +88,7 @@
 
 ### 列表（list）
 
->列表由一系列按特定顺序排列的元素组成。在Python中，用`方括号`（[]）来表示列表，并用逗号来分隔其中的元素。
+>列表由一系列按特定顺序排列的元素组成。在Python中，用`方括号`[]来表示列表，并用逗号来分隔其中的元素。
 
 #### 列表的特征
 
@@ -170,3 +170,229 @@
     ['trek']
 
 ```
+
+#### 列表排序
+
+- sort()方法
+
+>永久性地修改了列表元素的排列顺序。默认是按照字母顺序排序，若想要按`相反的顺序`只需要传递参数`reverse=True`
+
+```python
+    cars = ['bmw','audi','toyota']
+
+    cars.sort()
+    print(cars)
+
+    #输出结果
+    ['audi','bmw','toyota']
+
+    cars.sort(reverse=True)
+    print(cars)
+
+    #输出结果
+    ['toyota','bmw','audi']
+```
+
+- sorted()函数
+
+>对列表进行临时排序
+
+```python
+    cars = ['bmw','audi','toyota']
+
+    print(sorted(cars))
+
+```
+
+- reverse()方法
+
+>反转列表排序
+
+- len()函数
+
+>获取列表的长度
+
+```python
+    cars = ['bmw','audi','toyota']
+
+    len(cars)
+
+    3
+```
+
+### 元组（tuple）
+
+#### 定义元组
+
+>Python将不能修改的值称为不可变的，而`不可变的`列表被称为元组。元组看起来犹如列表，但使用`圆括号()`而不是方括号来标识。定义元组后，就可以使用索引来访问其元素，就像访问列表元素一样。
+
+```python
+    dimensions = (200,300,500)
+
+    print(dimensions(0))
+
+    #输出结果
+    200
+```
+
+### 集合（set)
+
+#### 定义集合
+
+>- 集合则更接近数学上集合的概念。每一个集合中的元素是`无序的、不重复的`任意对象，通过花括号`{}`来标识我们可以通过集合去判断数据的从属关系，有时还可以通过集合把数据结构中重复的元素减掉
+>
+>- 定义一个空的集合必须使用`set()`,因为{}是用来创建一个空的字典的。
+
+```python
+    student = {'Tom', 'Jim', 'Mary','Jack', 'Rose'}
+
+    #定义空的集合
+    num = set()
+```
+
+#### 集合的添加与删除
+
+- add()
+- discard()
+
+```python
+    student = {'Tom', 'Jim', 'Mary','Jack', 'Rose'}
+
+    student.add('Johnaon')
+    student.discard('Tom')
+```
+
+### 字典
+
+#### 定义字典
+
+>在Python中，字典是一系列键-值对。每个键都与一个值相关联，在Python中，字典用放在花括号`{key:value}`中的一系列键-值对表示
+
+```python
+    alien = {'color':'green','point':20}
+```
+
+#### 字典的特征
+
+1. 字典中数据必须是以键值对的形式出现的；
+2. 逻辑上讲，`键是不能重复的`，而`值可以重复`；
+3. 字典中的键（key）是不可变的，也就是无法修改的；而值（value）是可变的，可修改的，可以是任何对象。
+
+#### 访问字典里的值
+
+>要获取与键相关联的值，可依次指定字典名和放在方括号内的键
+
+```python
+    alien = {'color':'green','point':20}
+
+    print(alien['color'])
+
+    #输出结果
+    'green'
+```
+
+#### 添加字典元素
+
+>字典是一种动态结构，可随时在其中添加键-值对。要添加键-值对，可依次指定字典名、用括号括起的键和相关联的值。
+
+```python
+    alien = {'color':'green','point':20}
+
+    alien['x_position'] = 0
+    alien['y_position'] = 20
+```
+
+- update() 方法
+
+>添加多个元素
+
+#### 修改字典中值
+
+>要修改字典中的值，可依次指定字典名、用方括号括起的键以及与该键相关联的新值。
+
+```python
+    alien = {'color':'green','point':20}
+
+    alien['color'] = 'black'
+```
+
+#### 删除字典元素
+
+- del 语句
+
+```python
+    alien = {'color':'green','point':20}
+
+    del alien['color']
+```
+
+## 三、 循环与判断
+
+### 运算符
+
+#### 比较运算符
+
+符号|意义
+--|--|
+==|左右两边等值的时候返回 True
+!=|左右两边不相等时返回True
+>|左边大于右边的时候返回True
+<|左边小于右边的时候返回True
+<=|左边小于或等于右边的时候返回True
+>=|左边大于或等于右边的时候返回True
+
+#### 成员运算符/身份运算符
+
+>成员运算符和身份运算符的关键词是in与is。把in放在两个对象中间的含义是，测试前者是否存在于in后面的集合中。
+
+#### 布尔运算符
+
+> and和or经常用于处理复合条件
+
+A|B
+--|--
+not x|如果×是True，则返回False，否则返回True。
+x and y|and表示“并且”，如果x和y都是True，则返回True；如果x xandy 和y有一个是False，则返回 False。
+x or y|or表示“或者”，如果x或y有其中一个是True，则返回True；Xofy如果×和y都是False，则返回 False。
+
+### 条件控制
+
+#### if...else语句
+
+```python
+    def account_login():
+        password = input('Password:')
+        if password == '123654':
+            print('Login success!')
+        else:
+            print('Wrong password or invalid input!')
+
+    account_login()
+```
+
+#### for 循环
+
+```python
+    for every_letter in 'Hello World':
+        print(every_letter)
+```
+
+#### while 循环
+
+>但如果while循环不能像for循环那样，在集合被穷尽之后停下来，我们又怎么样才能控制 while循环呢？其中一种方式就是：在循环过程中制造某种可以使循环停下来的条件
+
+```python
+    count = 0
+    while True:
+        print('Repeat this line!')
+        count = count +1
+        if count = 3:
+            break
+```
+
+## 四、函数
+
+
+## 五、类
+
+## 六、文件与异常
