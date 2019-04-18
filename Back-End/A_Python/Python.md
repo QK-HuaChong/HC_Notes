@@ -392,7 +392,216 @@ x or y|or表示“或者”，如果x或y有其中一个是True，则返回True�
 
 ## 四、函数
 
+### 函数的定义
+
+>使用关键字`def`来告诉Python你要定义一个函数。这是函数定义，向Python指出了函数名，还可能在括号内指出函数为完成其任务需要什么样的信息。
+
+```python
+    def greet_user():
+        print('Hello!')
+
+    geet_user()
+
+    #输出结果
+    'Hello'
+```
+
+### 导入模板中的函数
+
+- import
+
+>import语句并在其中指定模块名，就可在程序中使用该模块中的所有函数。
+
+- from ... import ...
+
+>导入模块中的特定函数
+
+- import ... as ...
+
+>使用as给模块指定别名
+
+- from ... import *
+
+>导入模块中的所有函数
 
 ## 五、类
 
+### 创建和使用类
+
+>关键字class是用来定义一个类
+
+```python
+    class Dog():
+        def __init__(self,name,age):
+            self.name = name
+            self.age = age
+
+        def sit(self):
+            print(self.name.title()+"is now sitting")
+```
+
+### 方法__init__()
+
+>它是一个指向实例本身的引用，让实例能够访问类中的属性和方法。每当你根据一个类创建新实例时，Python都会自动运行。
+
+### 根据类创建实例
+
+```python
+    my_dog = Dog('willie',8)
+
+    print("My Dog name is"+my_dog.name.title())
+```
+
+## 继承
+
+>编写类时，并非总是要从空白开始。如果你要编写的类是另一个现成类的特殊版本，可使用继承。一个类继承另一个类时，它将自动获得另一个类的所有属性和方法；原有的类称为`父类`，而新类称为`子类`。子类继承了其父类的所有属性和方法，同时还可以定义自己的属性和方法。
+
+```python
+    class Person():
+        def show(self):
+            print("我是父类")
+        def home(self):
+            print("涟水")
+
+    class Man(Person):
+        def show(self):
+            print("我是子类"）
+
+    son = Man()
+    son.show()
+    son.home()
+
+```
+
+### 多继承
+
+>一个类可以继承多个父类
+
+```python
+    class Father():
+        def father_show(self):
+        print("我是孩子的父亲")
+    class Developer():
+        def dev_show(self):
+        print("我是一名程序员")
+    class Myself(Father,Developer):
+        def myself_show(self):
+        print("我是QK-HuaChong")
+    me = Myself()
+    me.myself_show()
+    me.father_show()
+    me.dev_show()
+```
+
+### 重写父类方法
+
+>对于父类的方法，只要它不符合子类模拟的实物的行为，都可对其进行重写。为此，可在子类中定义一个这样的方法，即它与要重写的父类方法同名。这样，Python将不会考虑这个父类方法，而只关注你在子类中定义的相应方法。
+
 ## 六、文件与异常
+
+### 从文件中读取数据
+
+- open()
+
+>函数open(),打开文件，这样才能访问它。函数open（）接受一个参数：要打开的文件的名称。
+
+- with
+
+>关键字with在不再需要访问文件后将其关闭。
+
+- read()
+
+>使用方法read(),读取这个文件的全部内容
+
+### 写入文件
+
+- open(filename,w)
+
+>调用open()时提供了两个实参。第一个实参也是要打开的文件的名称；第二个实参（'w’）告诉Python，我们要以写入模式打开这个文件。打开文件时，可指定`读取模式（'r’）`、`写入模式（‘w’）`、`附加模式（‘a’）`或让你能够读取和写入文件的模式（'r+'）。
+
+- write()
+
+>我们使用文件对象的方法write()将一个字符串写入文件。
+
+## 七、异常
+
+>Python使用被称为异常的特殊对象来管理程序执行期间发生的错误。每当发生让Python不知所措的错误时，它都会创建一个异常对象。如果你编写了处理该异常的代码，程序将继续运行；如果你未对异常进行处理，程序将停止，并显示一个raceback，其中包含有关异常的报告。
+
+### try-except 代码块
+
+```python
+    try:
+        print(5/0)
+    except ZeroDivisionError:
+        print('You can’t divide by zero')
+```
+
+### 存储数据
+
+#### 使用json.dump() 和 json.load()
+
+- json.dump()
+
+>函数json.dump（）接受两个实参：要存储的数据以及可用于存储数据的文件对象。
+
+```python
+    import json
+
+    number = [84,46,4587,12]
+
+    filename = 'number.json'
+    with open(filename,'w') as f_w:
+        json.dimp(number,f_w)
+```
+
+- json.load()
+
+>使用json.load（）将这个列表读取到内存中
+
+```python
+    import json
+
+    filename = 'number.json'
+    with open(filename) as f_r:
+        numbers = json.load(f_r)
+```
+
+#### 实例：
+
+```python
+    import json
+
+    class Greet(object):
+
+        def __init__(self, *args, **kwargs):
+            return super().__init__(*args, **kwargs)
+
+        def user_new_get(self,username):
+            filename = 'userInfo.json'
+            with open(filename,'w') as f_w:
+                json.dump(username,f_w)
+            return username
+
+        def user_save_get(self):
+            filename = 'userInfo.json'
+            try:
+                with open(filename) as f_r:
+                    username = json.load(f_r)
+            except FileNotFoundError:
+                return None
+            else:
+                return username
+
+        def greet_user(self):
+            username = input('Please Enter Your Name:')
+            username_saved = self.user_save_get()
+            if username == username_saved:
+                print('Welcome '+username+' come back!!')
+            else:
+                username = self.user_new_get(username)
+                print('We’ll remeber you when you come back! '+username+'!')
+
+    greet = Greet()
+
+    greet.greet_user()
+```
