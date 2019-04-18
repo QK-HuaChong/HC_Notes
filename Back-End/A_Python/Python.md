@@ -377,6 +377,10 @@ x or y|or表示“或者”，如果x或y有其中一个是True，则返回True�
         print(every_letter)
 ```
 
+- range(start, stop[, step])
+
+>range会返回一个整数序列，statr为整数序列的起始值，end为整数序列的结束值，在生成的整数序列中，不包含结束值。step为整数序列中递增的步长，默认为1。
+
 #### while 循环
 
 >但如果while循环不能像for循环那样，在集合被穷尽之后停下来，我们又怎么样才能控制 while循环呢？其中一种方式就是：在循环过程中制造某种可以使循环停下来的条件
@@ -389,6 +393,18 @@ x or y|or表示“或者”，如果x或y有其中一个是True，则返回True�
         if count = 3:
             break
 ```
+
+#### break
+
+> break语句用来终止循环语句，即循环条件没有False条件或者序列还没被完全递归完，也会停止执行循环语句。
+
+#### continue
+
+>continue 语句用来告诉Python跳过当前循环的剩余语句，然后继续进行下一轮循环。
+
+#### pass
+
+>Python pass 是空语句，是为了保持程序结构的完整性。
 
 ## 四、函数
 
@@ -407,6 +423,10 @@ x or y|or表示“或者”，如果x或y有其中一个是True，则返回True�
 ```
 
 ### 导入模板中的函数
+
+#### 模块
+
+>ython 模块(Module)，是一个 Python 文件，以 .py 结尾，包含了 Python 对象定义和Python语句。模块让你能够有逻辑地组织你的 Python 代码段。
 
 - import
 
@@ -527,13 +547,16 @@ x or y|or表示“或者”，如果x或y有其中一个是True，则返回True�
 
 >Python使用被称为异常的特殊对象来管理程序执行期间发生的错误。每当发生让Python不知所措的错误时，它都会创建一个异常对象。如果你编写了处理该异常的代码，程序将继续运行；如果你未对异常进行处理，程序将停止，并显示一个raceback，其中包含有关异常的报告。
 
-### try-except 代码块
+### try-except-else代码块
 
 ```python
     try:
         print(5/0)
     except ZeroDivisionError:
         print('You can’t divide by zero')
+    else:
+        #正确时执行
+        print('Correct output')
 ```
 
 ### 存储数据
@@ -556,7 +579,7 @@ x or y|or表示“或者”，如果x或y有其中一个是True，则返回True�
 
 - json.load()
 
->使用json.load（）将这个列表读取到内存中
+>使用json.load()将这个列表读取到内存中
 
 ```python
     import json
