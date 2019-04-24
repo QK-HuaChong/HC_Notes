@@ -4,6 +4,8 @@
 
 ### &nbsp; REST（Representational State Transfer）含状态传输是一种软件架构风格
 
+### **RESTFul = 有意义的 URL + 合适的 HTTP 动词**
+
 ## Rest体现在API设计主要有以下几点：
 
 > * 通过URL来指定资源
@@ -21,14 +23,18 @@
 
 ## 注意事项：
 
-> * URL不能包含动词
-> ```
-> POST /en/zh/show
-> ```
-> * URL中的名词表示资源集合，使用复数形式
-> ```
-> GET http://www.wxample.com/projects
->```
+>URL不能包含动词
+
+```txt
+POST /en/zh/show
+
+```
+
+>URL中的名词表示资源集合，使用复数形式
+
+```txt
+GET http://www.wxample.com/projects
+```
 
 ## 使用案例：
 
