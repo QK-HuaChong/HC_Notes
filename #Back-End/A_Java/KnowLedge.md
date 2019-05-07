@@ -2,7 +2,7 @@
 # ``Java知识``
 
 2018-03-06
-===
+---
 
 > - 1.类名要求与文件包名一致
 > - 2.一个文件中只能有一个公共类，且文件名要与   公共类名一致
@@ -70,13 +70,18 @@
 >    System.out.println();
 >}
 > ```
-> - 修饰符：
->    public , private , static
-> - 返回类型：
->   void , int ,...；
+
+- 修饰符：
+
+> public , private , static
+
+- 返回类型：
+
+> void , int ,...；
 > 有返回类型的必须通过return返回
-> - 方法名：首字母小写，小驼峰式命名
-> - 参数：由调用方传递给方法运行时处理的数据
+
+- 方法名：首字母小写，小驼峰式命名
+- 参数：由调用方传递给方法运行时处理的数据
 
 2018-03-09
 =========
@@ -93,7 +98,7 @@
 
 > - 数组的声明： 元素类型[] 变量名;
 > - 数组的初始化：
->   数组变量 = new 数据类型 [数据长度] 
+> 数组变量 = new 数据类型 [数据长度]
 >```java
 > String[] arrStr = new String[3];
 > ```
@@ -445,21 +450,21 @@ public class Person{
 
 ### 抽象方法：
 
->```java 
+>```java
 >public abstract class Animal{
 >  .......
 >  public abstract eat();
 >}
 >```
 >     没有具体的方法实现，直接以；结尾，拥有类无法实现该方法。
-> 
+>
 ### 用于父类的方法设计
 
 #### 面向过程编程/面向对象编程/面向接口编程
 
 ### final 关键字
 
-> - 给变量加上final，则一旦赋值就不可以改变。   
+> - 给变量加上final，则一旦赋值就不可以改变。
 >   1.变量名全部大写;  
 >   2.变量名有多个单词组成时，单词间以_分隔。
 > - 类加上final就不被被继承
@@ -476,7 +481,6 @@ public class Person{
 > - 没有构造
 > - 接口支持多继承
 > - 一个类可以实现多个接口
-
 
 ```java
 public interface Istudentable{
@@ -657,11 +661,15 @@ String s1 = new String(b1);
 
 ## Math类：
 
->### abs() 绝对值
->### ceil()   向上取整
->### floor()  向下取整
->### min() / max() 最值
->### NumberFormat 数字格式化
+### abs() 绝对值
+
+### ceil()   向上取整
+
+### floor()  向下取整
+
+### min() / max() 最值
+
+### NumberFormat 数字格式化
 
 ### Date类
 
@@ -672,7 +680,6 @@ Date d = new Date();
 ```
 
 #### Calender
-
 
 ## 31. 异常
 
@@ -915,10 +922,14 @@ public class TestBox{
 #### 泛型是不存在多态的
 
 > 自定义泛型方法：
-> - 修饰符 <T> 返回类型 方法名（参数） throws 异常{
+
+- 修饰符 <T> 返回类型 方法名（参数） throws 异常{
   方法体
+
 }
-> 泛型通配符：
+
+泛型通配符：
+
 > - ？ 可以通配任意类型
 > - ？ extend  E
 > - ？ super   E
@@ -974,10 +985,11 @@ try(File .....){
 
 > - 本身没有读写能力，必须嫁接在节流之上，可以在节点流的基础之上（以InputStream/OutputStream为参数）添加新的功能。
 
-> ### BufferedInputStream/BufferedOutpuStream[添加缓存]
-> ### ObjectInputStream/ObjectOutStream[添加了读写对象的功能]
+### BufferedInputStream/BufferedOutpuStream[添加缓存]
 
->对象的序列化
+### ObjectInputStream/ObjectOutStream[添加了读写对象的功能]
+
+对象的序列化
 
 > - serialVersionUID 序列化版本号
 > - transient 瞬态
@@ -1239,4 +1251,3 @@ graph LR;
 ---
 
 ### 5.JVM性能调优方法和步骤
-
