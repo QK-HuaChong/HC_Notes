@@ -137,3 +137,15 @@ graph LR
     style id1 fill:#f9f,stroke:#333,stroke-width:4px,fill-opacity:0.5
     style id2 fill:#ccf,stroke:#f66,stroke-width:2px,stroke-dasharray: 10,5
 ```
+
+```mermaid
+graph LR
+    subgraph 年轻代
+         Eden-->Survivor_from
+         Survivor_from-->Survivor_to
+    end
+    subgraph 堆内存
+    PSYoungGen(年轻代)-->ParOldGen(老年代)
+    ParOldGen(老年代)-->MetaSpace(永久代)
+    end
+```
