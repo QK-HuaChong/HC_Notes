@@ -6,15 +6,15 @@
 
 - JVM内存模型
 
-![JVM内存模型](img\jvm_01.jpg 'JVM内存模型')
+![JVM内存模型](img/jvm_01.jpg 'JVM内存模型')
 
 - JMM内存模型：定义程序中变量的访问规则
 
-![JVM内存模型](img\jvm_02.jpg 'JVM内存模型')
+![JVM内存模型](img/jvm_02.jpg 'JVM内存模型')
 
 - JMM保证
 
-![JVM内存模型](img\jvm_03.jpg 'JVM内存模型')
+![JVM内存模型](img/jvm_03.jpg 'JVM内存模型')
 
 **注：** volatile
 
@@ -32,7 +32,7 @@
 
 #### 2.1、类加载的流程
 
-![类加载](img\jvm_04.png '类加载流程')
+![类加载](img/jvm_04.png '类加载流程')
 
 #### 2.2、双亲委派模式：
 
