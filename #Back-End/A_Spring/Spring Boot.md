@@ -76,7 +76,7 @@ spring.redis.timeout=0
 
 ### 3.1.表达式语法：
 
-<table border="2">
+<table border="2">  
   <tr>
     <th>表达式：</th>
     <th>1.变量表达式</th>
@@ -105,7 +105,7 @@ spring.redis.timeout=0
 
   ```java
     #{main.title}  
-    #{message.entrycreated(${entryId})} 
+    #{message.entrycreated(${entryId})}
   ```
 
 * 4.URL表达式:
@@ -237,7 +237,6 @@ spring.redis.timeout=0
     </tr>
   </tbody>
   </table>
-
 
 ## 4.Spring Boot + JPA
 
