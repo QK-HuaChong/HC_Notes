@@ -230,7 +230,7 @@ excution(* concert.Performance.perform(..))
   - @DeclareParents注解所标注的`静态属性指明了要引入了接口`。在这里，我们所引入的是Encoreable接口。
 
 ```java
-    @Aspect
+@Aspect
 @Component
 public class EncoreableIntroducer {
 
