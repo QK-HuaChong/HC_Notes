@@ -185,3 +185,56 @@ excution(* concert.Performance.perform(..))
         ..     任意参数
     */
 ```
+
+- 定义切面
+  - @AspectJ注解
+  >定义一个类为切面
+
+  - AspectJ的五种定义通知的注解：
+  
+  |注解|通知|
+  |--|---|
+  |@After|通知方法会在目标方法返回或抛出异常后调用|
+  |@AfterReturning|通知方法会在目标方法返回后调用|
+  |@AfterThrowing|通知方法会在目标方法抛出异常后调用|
+  |@Around|通知方法会得目标方法封装起来|
+  |@Before|通知方法会在目标方法调用之前执行|
+
+  - 注解@Pointcut
+  >定义可重用的切点
+
+  ```java
+  import ...
+
+  @AspectJ
+  public class Audience{
+      @Pointcut("execution(** concert.Performance.perform(..))")
+      public void performance(){}
+
+      @Before("performance()")
+      public void silenceCellPhones(){
+          System.out.println("Silencing cell phone");
+      }
+
+      @AfterReturning("performance()")
+      public void applause(){
+           System.out.println("CLAP CLAP!!");
+      }
+  }
+  ```
+
+- 注解@DeclareParents 引入新的功能
+  >注解由三个部分组成
+  - value属性指定了`哪种类型的bean要引入该接口`。在本例中，也就是所有实现Performance的类型。（标记符后面的**加号**表示是`Performance的所有子类型`，而不是Performance本身。
+  - defaultImpl属性指定了`为引入功能提供实现的类`。在这里，我们指定的是DefaultEncoreable提供实现。
+  - @DeclareParents注解所标注的`静态属性指明了要引入了接口`。在这里，我们所引入的是Encoreable接口。
+
+```java
+    @Aspect
+@Component
+public class EncoreableIntroducer {
+
+    @DeclareParents(value = "com.hcpigg.springdemo.Day0517.example.Performance+",defaultImpl = EncoreableImpl.class)
+    public static Encoreable encoreable;
+}
+````
