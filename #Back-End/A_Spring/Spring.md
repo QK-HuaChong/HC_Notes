@@ -6,11 +6,31 @@
 
 >应用上下文:(由org.springframework.context.Applicationcontext接口定义)基于BeanFactory构建，并提供应用框架级别的服务，例如从属性文件解析文本信息以及发布应用事件给感兴趣的事件监听者。
 
-- AnnotationConfigApplicationContext
-- AnnotationConfigWebApplicationContext
-- ClassPathXmlApplicationContext
-- FileSystemXmlApplicationContext
-- XmlWebApplicationContext
+1. AnnotationConfigApplicationContext:从一个或多个基于java的配置类中加载上下文定义，适用于java注解的方式；
+2. ClassPathXmlApplicationContext:从类路径下的一个或多个xml配置文件中加载上下文定义，适用于xml配置的方式；
+3. FileSystemXmlApplicationContext:从文件系统下的一个或多个xml配置文件中加载上下文定义，也就是说系统盘符中加载xml配置文件；
+4. AnnotationConfigWebApplicationContext:专门为web应用准备的，适用于注解方式；
+5. XmlWebApplicationContext:从web应用下的一个或多个xml配置文件加载上下文定义，适用于xml配置方式。
+
+```java
+    public class Test {
+    public static void main(String[] args) {
+        //加载项目中的spring配置文件到容器
+        ApplicationContext context = new ClassPathXmlApplicationContext("resouces/applicationContext.xml");
+
+        //加载系统盘中的配置文件到容器
+        ApplicationContext context = new FileSystemXmlApplicationContext("E:/Spring/applicationContext.xml");
+
+        //加载java的配置类
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(PerformanceConfig.class);
+
+
+        //从容器中获取对象实例
+        Man man = context.getBean(Man.class);
+        man.driveCar();
+    }
+}
+```
 
 ## 一、装配Bean
 
@@ -236,5 +256,15 @@ public class EncoreableIntroducer {
 
     @DeclareParents(value = "com.hcpigg.springdemo.Day0517.example.Performance+",defaultImpl = EncoreableImpl.class)
     public static Encoreable encoreable;
+}
+````
+
+```java
+public static void main(String[] args){
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(PerformanceConfig.class);
+        Performance d = ac.getBean("performanceImpl",PerformanceImpl.class);
+        Encoreable e = (Encoreable)d;
+        d.perform();
+        e.performEncore();
 }
 ````

@@ -2,7 +2,7 @@
 
 ## 1.Spring Boot 项目的搭建：
 
-### 1.1.注入依赖：在pom.xml文件中注入以下以来：
+### 1.1.注入Starter依赖：在pom.xml文件中注入以下以来：
 
 ```xml
     <parent>
@@ -76,15 +76,9 @@ spring.redis.timeout=0
 
 ### 3.1.表达式语法：
 
-<table border="2">  
-  <tr>
-    <th>表达式：</th>
-    <th>1.变量表达式</th>
-    <th>2.选择或星号表达式</th>
-    <th>3.消息表达式</th>
-    <th>4.URL表达式</th>
-  </tr>
-</table>
+|表达式：|1.变量表达式|2.选择或星号表达式|3.消息表达4.URL表达式|
+|-|-|-|-|
+
 
 * 1.变量表达式:
   变量表达式即OGNL表达式或Spring EL表达式(在Spring术语中也叫model attributes)。如下所示：
