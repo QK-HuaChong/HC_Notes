@@ -4,7 +4,7 @@
 
 - Ctrl + Shift + T
 
-![创建测试类](images\Ikjj_001.png)
+![创建测试类](images/Ikjj_001.png)
 
 >弹出交互窗口后，编辑类名称、选择需要测试的方法
 
@@ -14,7 +14,7 @@
 
 - Ctrl + Shift + F
 
-![路径中查找](images\Ikjj_002.png)
+![路径中查找](images/Ikjj_002.png)
 
 >在路径中查找
 
