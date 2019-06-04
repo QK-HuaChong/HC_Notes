@@ -1,1 +1,1 @@
-# Hystrix 熔断器
+# Spring Cloud Hystrix 熔断器

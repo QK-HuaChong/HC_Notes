@@ -1,4 +1,10 @@
-# Fegin 服务注册及发现
+# Spring Cloud Fegin --- 声明式REST调用
+
+## 功能定位
+
+>Feign是Netflix开发的声明式、模板化的HTTP客户端，其灵感来自Retrofit、JAXRS-2.0以及Websocket。Feign可帮助我们更加便捷、优雅地调用HTTPAPl。
+>在Spring Cloud中，使用Feign非常简单—创建一个接口，并在接口上添加一些注解，代码就完成了。Feign支持多种注解，例如Feign自带的注解或者JAX-RS注解等。
+>Spring Cloud对Feign 进行了增强，使Feign支持了Spring MVC注解，并整合了Ribbon和Eureka，从而让Feign的使用更加方便。
 
 ## 配置服务映射
 
