@@ -23,7 +23,7 @@ public class HelloController {
         return "hello1";
     }
 
-    @RequestMapping("/hjcs")
+    @RequestMapping("/hello")
     public List<String> laowangs(String ids){
         List<String> list = new ArrayList<>();
         list.add("laowang1");
@@ -32,7 +32,7 @@ public class HelloController {
         return list;
     }
 
-    @RequestMapping(value = "/hellol", method= RequestMethod.GET)
+    @RequestMapping(value = "/hello1", method= RequestMethod.GET)
     public String hello(@RequestParam String name) {
         return "Hello " + name;
     }
