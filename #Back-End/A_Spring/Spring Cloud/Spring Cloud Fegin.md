@@ -77,7 +77,7 @@ public interface LsgConsumerFeigns {
     }
 ```
 
-### fallback 容错处理类
+### fallbackMethod 容错处理
 
 ```java
 @RestController
