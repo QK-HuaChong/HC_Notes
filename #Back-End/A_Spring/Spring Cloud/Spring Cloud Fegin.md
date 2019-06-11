@@ -104,3 +104,49 @@ public class LsgConsumerController {
     }
 }
 ```
+
+### 在Feign中使用Hystrix
+
+>编辑配置文件开启Fegin中使用Hystrix
+
+```yml
+feign:
+  hystrix:
+    enabled: true
+```
+
+>在 Feign 上添加fallback属性
+
+```java
+    @FeignClient(name = "spring-lsg-provider",fallback = FeginClientFallBack.class)
+public interface LsgConsumerFeigns {
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    LsgUser findById(@PathVariable("id") Long id);
+    @GetMapping("/name")
+    String showName();
+}
+```
+
+>创建类并引用Fegin接口
+
+```java
+    @Component
+public class FeginClientFallBack implements LsgConsumerFeigns{
+    @Override
+    public LsgUser findById(Long id) {
+        LsgUser lsgUser = new LsgUser();
+        BigDecimal bigDecimal = new BigDecimal(2);
+        lsgUser.setAge(25);
+        lsgUser.setBalance(bigDecimal);
+        lsgUser.setId(5L);
+        lsgUser.setName("Huachong");
+        lsgUser.setUsername("Flower");
+        return lsgUser;
+    }
+
+    @Override
+    public String showName() {
+        return "Server termination";
+    }
+}
+```
