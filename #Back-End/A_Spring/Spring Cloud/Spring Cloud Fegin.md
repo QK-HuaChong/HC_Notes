@@ -15,58 +15,36 @@
  * Created by cong on 2018/5/8.
  */
 @RestController
-public class HelloController {
+public class LsgUserController {
 
-    @RequestMapping("/hello")
-    public String hello(){
-        System.out.println("访问来1了......");
-        return "hello1";
+    /*private static final Logger LOG = LoggerFactory.getLogger(LsgUserController.class);*/
+
+    @Autowired
+    private LsgUserRepository lsgUserRepository;
+
+    @GetMapping("/{id}")
+    public LsgUser findById(@PathVariable Long id){
+        LsgUser lsgUser = this.lsgUserRepository.findById(id).orElse(null);
+        return lsgUser;
     }
 
-    @RequestMapping("/hello")
-    public List<String> laowangs(String ids){
-        List<String> list = new ArrayList<>();
-        list.add("laowang1");
-        list.add("laowang2");
-        list.add("laowang3");
-        return list;
+    @GetMapping("/name")
+    public String showName(){
+        /*LOG.info("Print information about Provider 1");*/
+        return "Provider-1-";
     }
-
-    @RequestMapping(value = "/hello1", method= RequestMethod.GET)
-    public String hello(@RequestParam String name) {
-        return "Hello " + name;
-    }
-
-    @RequestMapping(value = "/hello2", method= RequestMethod.GET)
-    public User hello(@RequestHeader String name, @RequestHeader Integer age) {
-        return new User(name, age);
-    }
-
-    @RequestMapping(value = "/hello3", method = RequestMethod.POST)
-    public String hello (@RequestBody User user) {
-        return "Hello "+ user. getName () + ", " + user. getAge ();
-    }
-
 }
 ````
 
 - 二、在Client定义服务映射接口
 
 ```java
-    @FeignClient(value = "hello-service",fallback = FeignFallBack.class)
-public interface FeignService {
-　　//服务中方法的映射路径
-    @RequestMapping("/hello")
-    String hello();
-
-    @RequestMapping(value = "/hellol", method= RequestMethod.GET)
-    String hello(@RequestParam("name") String name) ;
-
-    @RequestMapping(value = "/hello2", method= RequestMethod.GET)
-    User hello(@RequestHeader("name") String name, @RequestHeader("age") Integer age);
-
-    @RequestMapping(value = "/hello3", method= RequestMethod.POST)
-    String hello(@RequestBody User user);
+   @FeignClient(name = "spring-lsg-provider")
+public interface LsgConsumerFeigns {
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    LsgUser findById(@PathVariable("id") Long id);
+    @GetMapping("/name")
+    String showName();
 }
 ```
 
@@ -86,30 +64,43 @@ public interface FeignService {
   - @EnableDiscoveryClient
   - @EnableFeignClients
 
+```java
+    @SpringBootApplication
+    @EnableFeignClients
+    @EnableDiscoveryClient
+    public class LsgConsumerApplication {
+
+        public static void main(String[] args) {
+            SpringApplication.run(LsgConsumerApplication.class, args);
+        }
+
+    }
+```
+
 ### fallback 容错处理类
 
 ```java
-    @Component
-public class FeignFallBack implements FeignService{
-　　//实现的方法是服务调用的降级方法
-    @Override
-    public String hello() {
-        return "error";
+@RestController
+public class LsgConsumerController {
+
+    private static final Logger LOG = LoggerFactory.getLogger(LsgConsumerController.class);
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private LsgConsumerFeigns lsgConsumerFegin;
+
+
+    @HystrixCommand(fallbackMethod = "findByIdFallback")
+    @GetMapping("/name")
+    public String findByName(){
+        /*return this.restTemplate.getForObject("http://spring-lsg-provider/name",String.class);*/
+        return this.lsgConsumerFegin.showName();
     }
 
-    @Override
-    public String hello(String name) {
-        return "error";
-    }
-
-    @Override
-    public User hello(String name, Integer age) {
-        return new User();
-    }
-
-    @Override
-    public String hello(User user) {
-        return "error";
+    public String findByIdFallback(){
+        return "Server termination";
     }
 }
 ```
