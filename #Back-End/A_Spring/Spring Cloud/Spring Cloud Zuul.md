@@ -129,4 +129,3 @@ zuul:
 >post.SendResponseFilter为例，只须设置zuul.SendResponseFilter.post.disable=true，即可禁用该过滤器。
 
 ## Zuul的容错与回退
-
