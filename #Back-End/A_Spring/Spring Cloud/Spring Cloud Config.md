@@ -90,7 +90,7 @@
 ```yml
 spring:
   application:
-    name: config
+    name: hc-config
   cloud:
     config:
       uri: http://localhost:8788/

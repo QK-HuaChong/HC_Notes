@@ -1,5 +1,16 @@
 # Vue.js
 
+## MVVM 模式
+
+* M：即Model，模型，包括数据和一些基本操作
+* V：即View，视图，页面渲染结果
+* VM：即View-Model，模型与视图间的双向操作（无需开发人员干涉）
+
+>而MVVM中的VM要做的事情就是把DOM操作完全封装起来，开发人员不用再关心Model和View之间是如何互相影响的：
+
+* 只要我们Model发生了改变，View上自然就会表现出来。
+* 当用户修改了View，Model中的数据也会跟着改变。
+
 ## 一、Vue实例
 
 ### 创建一个Vue实例
@@ -25,14 +36,34 @@
 
 ### 插值
 
-- 文本
+* 文本
     >数据绑定最常见的形式就是使用“Mustache”语法（双大括号）的文本插值：
 
 ```html
     <span>Message:{{ msg }}</span>
 ```
 
-- Html
+* 插值闪烁
+  >使用{{}}方式在网速较慢时会出现问题。在数据未加载完成时，页面会显示出原始的{{}}，加载完毕后才显示正确数据，我们称为插值闪烁。
+
+* v-text
+    >将数据输出到元素内部，如果输出的数据有HTML代码，会作为普通文本输出
+
+```html
+    <div id="app">
+        <span v-text="text"></span>
+    </div>
+
+    <script>
+        new Vue({
+        el: '#app',
+        data: {
+            text: '你好，中国',
+        }
+        })
+    </script>
+
+* v-html
     >使用v-html 指令用于输出html代码：
 
 ```html
@@ -41,16 +72,16 @@
     </div>
 
     <script>
-new Vue({
-  el: '#app',
-  data: {
-    message: '<span style="color:red">This should be red</span>'
-  }
-})
-</script>
+        new Vue({
+        el: '#app',
+        data: {
+            message: '<span style="color:red">This should be red</span>'
+        }
+        })
+    </script>
 ```
 
-- 属性中的值
+* 属性中的值
     >HTML 属性中的值应使用v-bind指令。
 
 ```html
@@ -70,7 +101,7 @@ new Vue({
 
 ### 条件语句
 
-- **v-if** And **v-else** And **v-else-if**
+* **v-if** And **v-else** And **v-else-if**
     >v-if 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回 truthy 值的时候被渲染。也可以用 v-else 添加一个“else 块”
 
 ```html
@@ -88,7 +119,7 @@ new Vue({
     </script>
 ```
 
-- 通过key管理可复用的元素
+* 通过key管理可复用的元素
     >所以Vue为你提供了一种方式来表达“这两个元素是完全独立的，不要复用它们”。只需添加一个具有唯一值的key属性即可
 
 ```html
@@ -114,7 +145,7 @@ new Vue({
 
 ### 样式绑定
 
-- 绑定HTML class
+* 绑定HTML class
     >我们可以传给`v-bind:class`一个对象，以动态地切换 class
 
 ```html
@@ -133,7 +164,7 @@ new Vue({
     </script>
 ```
 
-- 绑定内联样式
+* 绑定内联样式
   >`v-bind:style` 的对象语法十分直观——看着非常像 CSS，但其实是一个 JavaScript 对象。CSS 属性名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用单引号括起来) 来命名
   
 ```html
@@ -198,7 +229,7 @@ new Vue({
     </script>
 ```
 
-- 事件修饰符
+* 事件修饰符
 
 |描述|方法|
 |---|:---|
@@ -210,13 +241,13 @@ new Vue({
 只当在 event.target 是当前元素自身时触发处理函数、即事件不是从内部元素触发的|\<div v-on:click.self="doThat">...</div>
 点击事件将只会触发一次|\<a v-on:click.once="doThis"></a>
 
-### 双向数据绑定
+### **双向数据绑定**
 
   >`v-model`指令用来在 input、select、text、checkbox、radio 等表单控件元素上创建双向数据绑定，根据表单上的值，自动更新绑定的元素的值。
 
 ```html
     <div id="app">
-        <h3>{{ title }}</h3>
+        <h3 v-text="title"></h3>
         <input v-model="title" />
     </div>
     <script>
@@ -351,7 +382,7 @@ new Vue({
 }
 ```
 
-### prop 向组件传递数据
+### props 向组件传递数据
 
 >Prop 是你可以在组件上注册的一些自定义特性。当一个值传递给一个 prop 特性的时候，它就变成了那个组件实例的一个属性
 
@@ -371,8 +402,8 @@ new Vue({
 
 >子组件要把数据传递回去，就需要使用自定义事件
 
-- 使用 $on(eventName) 监听事件
-- 使用 $emit(eventName) 触发事件
+* 使用 $on(eventName) 监听事件
+* 使用 $emit(eventName) 触发事件
 
 ```html
     <div id="app">
@@ -514,3 +545,25 @@ new Vue({
 ## 自定义指令
 
 >代码复用和抽象的主要形式是组件。然而，有的情况下，你仍然需要对普通 DOM 元素进行底层操作，这时候就会用到自定义指令
+
+## vue-cli
+
+在开发中，需要打包的东西不止是js、css、html。还有更多的东西要处理，这些插件和加载器如果我们一一去添加就会比较麻烦。
+
+幸好，vue官方提供了一个快速搭建vue项目的脚手架：vue-cli
+
+安装命令：
+
+```cmd
+    npm install -g vue-cli
+```
+
+### 单文件组件
+
+每一个.vue文件，就是一个独立的vue组件。
+
+而单文件组件中包含三部分内容：
+
+* template：模板，支持html语法高亮和提示
+* script：js脚本，这里编写的就是vue的组件对象，看到上面的data(){}了吧
+* style：样式，支持CSS语法高亮和提示

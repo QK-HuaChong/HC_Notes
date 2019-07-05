@@ -1,8 +1,8 @@
 # Spring Boot
 
-## 1.Spring Boot 项目的搭建：
+## 1.Spring Boot 项目的搭建
 
-### 1.1.注入Starter依赖：在pom.xml文件中注入以下以来：
+### 1.1.注入Starter依赖：在pom.xml文件中注入以下
 
 ```xml
     <parent>
@@ -21,7 +21,7 @@
     </dependencies>
 ```
 
-### 1.2.启动类：
+### 1.2.启动类
 
 >注解说明:
 @SpringBootApplication：
@@ -33,13 +33,23 @@
 >
 > @ComponentScan，扫描当前包及其子包下被@Component，@Controller，@Service，@Repository注解标记的类并纳入到spring容器中进行管理。是以前的<context:component-scan>（以前使用在xml中使用的标签，用来扫描包配置的平行支持）。所以本demo中的User为何会被spring容器管理。
 
-## 2.Spring Boot + Redis 缓存处理：
+## 1.3 管理JDK版本
 
-### 2.1.Redis介绍：
+默认情况下，maven工程的jdk版本是1.5，而我们开发使用的是1.8，因此这里我们需要修改jdk版本，只需要简单的添加以下属性即可：
+
+```xml
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+```
+
+## 2.Spring Boot + Redis 缓存处理
+
+### 2.1.Redis介绍
 
 Redis是一款开源的、高性能的键-值存储（key-value store）。它常被称作是一款数据结构服务器（data structure server）。
 
-### 2.2.依赖注入：
+### 2.2.依赖注入
 
 ```xml
     <dependency>  
@@ -48,7 +58,7 @@ Redis是一款开源的、高性能的键-值存储（key-value store）。它�
     </dependency>
 ```
 
-### 2.3.添加配置信息：
+### 2.3.添加配置信息
 
 ```txt
 # REDIS (RedisProperties)
@@ -72,9 +82,9 @@ spring.redis.pool.min-idle=0
 spring.redis.timeout=0  
 ```
 
-## 3. thymeleaf模板引擎：
+## 3. thymeleaf模板引擎
 
-### 3.1.表达式语法：
+### 3.1.表达式语法
 
 |表达式：|1.变量表达式|2.选择或星号表达式|3.消息表达4.URL表达式|
 |-|-|-|-|
@@ -110,7 +120,7 @@ spring.redis.timeout=0
     <a href="main.html" th:href="@{/main}">
   ```
 
-#### 3.1.1常用th标签：
+#### 3.1.1常用th标签
 
   <table border="2">
   <tbody>
@@ -244,7 +254,7 @@ spring.redis.timeout=0
     </dependency>
 ```
 
-> ## MySQL 驱动名称改动：
+> ## MySQL 驱动名称改动
 
  ```properties
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver变更为:
@@ -252,7 +262,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver变更为:
 
 ```
 
-### 4.2.创建JPA：
+### 4.2.创建JPA
 
 创建JPA接口并且继承SpringDataJPA内的接口作为父类
 
@@ -266,7 +276,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver变更为:
 }
 ```
 
-### 4.3.将JPA注入到需要使用的类中：
+### 4.3.将JPA注入到需要使用的类中
 
 ```java
     @Autowired
@@ -313,7 +323,7 @@ spring.datasource.driver-class-name=com.mysql.jdbc.Driver变更为:
     cache: true
 ```
 
-## 5. 集成Swagger：
+## 5. 集成Swagger
 
 * 导入相关jar
 
@@ -421,3 +431,22 @@ public class Swagger2 {
 @EqualsAndHashCode|作用在类上，生成对应的 equals 和 hashCode 方法
 @Data|作用在类上，效果等同于上述 5 个注解，排除 @AllArgsConstructor 功能
 @Log4j/@Slf4j|作用在类上，生成对应的 Logger 对象，变量名为 log
+
+### RestTemplate
+
+首先在项目中注册一个`RestTemplate`对象，可以在启动类位置注册：
+
+```java
+  @SpringBootApplication
+  public class HttpDemoApplication {
+    public static void main(String[] args) {
+      SpringApplication.run(HttpDemoApplication.class, args);
+    }
+
+  @Bean
+  public RestTemplate restTemplate() {
+        // 默认的RestTemplate，底层是走JDK的URLConnection方式。
+    return new RestTemplate();
+    }
+  }
+```
