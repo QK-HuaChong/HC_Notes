@@ -6,4 +6,45 @@
 
 ## 消息队列的物种消息模式
 
-![1527068544487](assets/1527068544487.png)
+![1527068544487](1527068544487.png)
+
+## 安装RabbitMQ
+
+### 1. 安装Erlang
+
+```shell
+    yum install esl-erlang_17.3-1~centos~6_amd64.rpm
+    yum install erlang
+```
+
+### 2. 安装RabbitMQ
+
+- 解压文件
+
+```sh
+    rpm -ivh rabbitmq-server-3.4.1-1.noarch.rpm
+```
+
+- 修改配置信息
+
+```sh
+    cp /usr/share/doc/rabbitmq-server-3.4.1/rabbitmq.config.example /etc/rabbitmq/rabbitmq.config
+```
+
+```config
+    {loopback_users,[]}
+```
+
+- **注意要去掉后面的逗号**
+
+### 3.启动应用
+
+- service rabbitmq-server start  启动
+- service rabbitmq-server stop  关闭
+- service rabbitmq-server restart  重启
+
+### 4. 设置开机启动
+
+```sh
+    chkconfig rabbitmq-server on
+```
