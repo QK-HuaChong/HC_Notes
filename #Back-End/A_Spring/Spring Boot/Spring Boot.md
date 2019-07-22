@@ -84,12 +84,6 @@ spring.redis.timeout=0
 
 ## 3. thymeleaf模板引擎
 
-### 3.1.表达式语法
-
-|表达式：|1.变量表达式|2.选择或星号表达式|3.消息表达4.URL表达式|
-|-|-|-|-|
-
-
 * 1.变量表达式:
   变量表达式即OGNL表达式或Spring EL表达式(在Spring术语中也叫model attributes)。如下所示：
 
@@ -120,127 +114,7 @@ spring.redis.timeout=0
     <a href="main.html" th:href="@{/main}">
   ```
 
-#### 3.1.1常用th标签
-
-  <table border="2">
-  <tbody>
-    <tr>
-      <td>th:id</td>
-      <td>替换id</td>
-      <td><code>    &lt;input th:id="'xxx' + ${collect.id}"/&gt; </code></td>
-    </tr>
-    <tr>
-      <td style="color:red">th:text</td>
-      <td>文本替换</td>
-      <td><code  >&lt;p  th:text="${collect.description}"&gt;description&lt;/p&gt;</code></td>
-    </tr>
-    <tr>
-      <td>th:utext</td>
-      <td>支持html的文本替换</td>
-      <td><code  >&lt;p  th:utext="${htmlcontent}"&gt;conten&lt;/p&gt;</code></td>
-    </tr>
-    <tr>
-      <td>th:object</td>
-      <td>替换对象</td>
-      <td><code  >&lt;div th:object="${session.user}"&gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:value</td>
-      <td>属性赋值</td>
-      <td><code  >&lt;input th:value="${user.name}" /&gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:with</td>
-      <td>变量赋值运算</td>
-      <td><code  >&lt;div th:with="isEven=${prodStat.count}%2==0"&gt;&lt;/div&gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:style</td>
-      <td>设置样式</td>
-      <td><code  >th:style="'display:' + @{(${sitrue} ? 'none' : 'inline-block')} + ''" </code></td>
-    </tr>
-    <tr>
-      <td>th:onclick</td>
-      <td>点击事件</td>
-      <td><code  >th:onclick="'getCollect()'" </code></td>
-    </tr>
-    <tr>
-      <td style="color:red">th:each</td>
-      <td>属性赋值</td>
-      <td><code  >tr th:each="user,userStat:${users}"&gt; </code></td>
-    </tr>
-    <tr>
-      <td style="color:red">th:if</td>
-      <td>判断条件</td>
-      <td><code  > &lt;a th:if="${userId == collect.userId}" &gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:unless</td>
-      <td>和th:if判断相反</td>
-      <td><code  >&lt;a th:href="@{/login}" th:unless=${session.user != null}&gt;Login&lt;/a&gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:href</td>
-      <td>链接地址</td>
-      <td><code  >&lt;a th:href="@{/login}" th:unless=${session.user != null}&gt;Login&lt;/a&gt; /&gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:switch</td>
-      <td>多路选择 配合th:case 使用</td>
-      <td><code  >&lt;div th:switch="${user.role}"&gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:case</td>
-      <td>th:switch的一个分支</td>
-      <td><code  > &lt;p th:case="'admin'"&gt;User is an administrator&lt;/p&gt;</code></td>
-    </tr>
-    <tr>
-      <td>th:fragment</td>
-      <td>布局标签，定义一个代码片段，方便其它地方引用</td>
-      <td><code  >&lt;div th:fragment="alert"&gt;</code></td>
-    </tr>
-    <tr>
-      <td>th:include</td>
-      <td>布局标签，替换内容到引入的文件</td>
-      <td><code  >&lt;head th:include="layout :: htmlhead" th:with="title='xx'"&gt;&lt;/head&gt; /&gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:replace</td>
-      <td>布局标签，替换整个标签到引入的文件</td>
-      <td><code  >&lt;div th:replace="fragments/header :: title"&gt;&lt;/div&gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:selected</td>
-      <td>selected选择框 选中</td>
-      <td><code  >th:selected="(${xxx.id} == ${configObj.dd})"</code></td>
-    </tr>
-    <tr>
-      <td>th:src</td>
-      <td>图片类地址引入</td>
-      <td><code  >&lt;img class="img-responsive" alt="App Logo" th:src="@{/img/logo.png}"  /&gt; </code></td>
-    </tr>
-    <tr>
-      <td>th:inline</td>
-      <td>定义js脚本可以使用变量</td>
-      <td><code  >&lt;script type="text/javascript" th:inline="javascript"&gt;</code></td>
-    </tr>
-    <tr>
-      <td>th:action</td>
-      <td>表单提交的地址</td>
-      <td><code  >&lt;form action="subscribe.html" th:action="@{/subscribe}"&gt;</code></td>
-    </tr>
-    <tr>
-      <td>th:remove</td>
-      <td>删除某个属性</td>
-      <td><code  >&lt;tr th:remove="all"&gt;   1.all:删除包含标签和所有的孩子。2.body:不包含标记删除,但删除其所有的孩子。3.tag:包含标记的删除,但不删除它的孩子。4.all-but-first:删除所有包含标签的孩子,除了第一个。5.none:什么也不做。这个值是有用的动态评估。</code></td>
-    </tr>
-    <tr>
-      <td>th:attr</td>
-      <td>设置标签属性，多个属性可以用逗号分隔</td>
-      <td>比如 <code  >th:attr="src=@{/image/aa.jpg},title=#{logo}"</code>，此标签不太优雅，一般用的比较少。</td>
-    </tr>
-  </tbody>
-  </table>
+### 3.1.1常用th标签
 
 ## 4.Spring Boot + JPA
 
