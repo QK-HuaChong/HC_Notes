@@ -9,4 +9,3 @@ win+L|锁屏
 win+D|返回桌面
 win+ctrl+D|新建桌面
 win+ctrl+ ←/→|切换桌面
-

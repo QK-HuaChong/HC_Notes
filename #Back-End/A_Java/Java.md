@@ -1,6 +1,6 @@
 # Java
 
-## JVM
+## JVM Java虚拟机
 
 ### 1. 内存模型
 
