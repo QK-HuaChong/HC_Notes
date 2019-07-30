@@ -67,7 +67,7 @@
     git tag 1.0.0 1b2e1d63ff
 ```
 
-## 上传到远程仓库Giuhub：
+## 上传到远程仓库Giuhub
 
 ```git
     echo "# HCPigg" >> README.md
@@ -78,7 +78,7 @@
     git push -u origin master
 ```
 
-## 配置（取消）代理：
+## 配置（取消）代理
 
 ```git
 git config --global http.proxy 192.168.6.3:808
